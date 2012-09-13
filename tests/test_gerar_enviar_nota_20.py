@@ -4,8 +4,8 @@ from datetime import datetime
 
 def test_gerar_enviar_nota_20(cert_info):
     from pysped_nfe import ProcessadorNFe
-    from pysped_nfe.manual_401 import *
-    from pysped_nfe.webservices_flags import *
+    from pysped_nfe.manual_401 import NFe_200, Det_200
+    from pysped_nfe.webservices_flags import UF_CODIGO
 
     p = ProcessadorNFe()
     p.versao = u'2.00'

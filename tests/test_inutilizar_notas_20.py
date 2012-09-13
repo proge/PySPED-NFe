@@ -2,7 +2,6 @@
 
 def test_inutilizar_notas_20(cert_info):
     from pysped_nfe import ProcessadorNFe
-    from pysped_nfe.webservices_flags import *
 
     p = ProcessadorNFe()
     p.versao = u'2.00'
