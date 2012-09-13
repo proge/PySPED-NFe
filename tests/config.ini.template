@@ -1,0 +1,4 @@
+[certificado]
+arquivo=certificado.pfx
+senha=associacao
+
