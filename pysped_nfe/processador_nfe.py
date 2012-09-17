@@ -601,7 +601,7 @@ class ProcessadorNFe(object):
         # Se a NF-e tiver sido informada, montar o processo da NF-e
         #
         if nfe:
-           nfe.procNFe = self.montar_processo_uma_nota(nfe, protnfe_recibo=resposta.protNFe)
+            nfe.procNFe = self.montar_processo_uma_nota(nfe, protnfe_recibo=resposta.protNFe)
 
         return processo
 
