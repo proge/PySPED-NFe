@@ -2,7 +2,16 @@ from distutils.core import setup
 
 setup(
     name = "PySPED-NFe",
-    packages = ["pysped_nfe"],
+    packages = [
+        'pysped_nfe', 'pysped_nfe.leiaute', 'pysped_nfe.danfe',
+        'pysped_nfe.manual_300', 'pysped_nfe.manual_401',
+        'pysped_nfe.relato_sped',
+        ],
+    package_data = {
+        'pysped_nfe.danfe': ['fonts/*'],
+        'pysped_nfe.leiaute': ['schema/*/*'],
+        'pysped_nfe.relato_sped': ['fonts/*'],
+        },
     version = "0.0.1",
     description = "Library for SPED NF-e manipulation",
     author = "Daniel Hartmann",
@@ -10,7 +19,6 @@ setup(
     url = "https://github.com/proge/PySPED-NFe",
     download_url = "https://nodeload.github.com/proge/PySPED-NFe/tarball/v0.0.1",
     keywords = ["sped", "brazil", "brasil", "nfe"],
-    requires=['PySPED-Tools (>=0.0.1)'],
     install_requires=['PySPED-Tools'],
     classifiers = [
         "Programming Language :: Python",
