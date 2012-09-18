@@ -61,6 +61,7 @@ from pysped_tools.certificado import Certificado
 # Manual do Contribuinte versão 3.00
 # NF-e leiaute 1.10
 #
+from . import leiaute
 from leiaute import SOAPEnvio_110, SOAPRetorno_110
 from leiaute import EnviNFe_110, RetEnviNFe_110
 from leiaute import ConsReciNFe_110, RetConsReciNFe_110, ProtNFe_110, ProcNFe_110
