@@ -2400,21 +2400,41 @@ class NFe(nfe_110.NFe):
         self.infNFe.ide.cNF.valor = self.chave[35:43]
 
     def monta_chave(self):
+        # Código da UF do emitente do Documento Fiscal
         chave = unicode(self.infNFe.ide.cUF.valor).strip().rjust(2, '0')
+        # Ano e Mês da emissão da NF-e
         chave += unicode(self.infNFe.ide.dEmi.valor.strftime('%y%m')).strip().rjust(4, '0')
+        # CNPJ do emitente
         chave += unicode(self.infNFe.emit.CNPJ.valor).strip().rjust(14, '0')
+        # Modelo do Documento Fiscal
         chave += '55'
+        # Série do Documento Fiscal
         chave += unicode(self.infNFe.ide.serie.valor).strip().rjust(3, '0')
+        # Número do Documento Fiscal
         chave += unicode(self.infNFe.ide.nNF.valor).strip().rjust(9, '0')
-
-        #
-        # Inclui agora o tipo da emissão
-        #
+        # Forma de emissão da NF-e
         chave += unicode(self.infNFe.ide.tpEmis.valor).strip().rjust(1, '0')
-
+        # Código numérico que compõe a Chave de Acesso
         chave += unicode(self.infNFe.ide.cNF.valor).strip().rjust(8, '0')
+        # Dígito verificador da Chave de Acesso
+        self.infNFe.ide.cDV.valor = self.modulus11(chave)
         chave += unicode(self.infNFe.ide.cDV.valor).strip().rjust(1, '0')
+
         self.chave = chave
+
+    def modulus11(self, chave):
+        chave = str(chave)[::-1]
+        soma = 0
+        fator = 2
+
+        for c in chave:
+            soma += int(c) * fator
+            fator += 1
+            if fator == 10:
+                fator = 2
+
+        resto = soma % 11
+        return unicode(11 - resto)
 
     def cst_descricao(self):
         if self.infNFe.emit.CRT.valor == 1:

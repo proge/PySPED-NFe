@@ -146,6 +146,7 @@ class ProcessadorNFe(object):
         self.caminho = ''
         self.salvar_arquivos = True
         self.contingencia_SCAN = False
+        self.gerar_danfe = False
         self.danfe = DANFE()
         self.caminho_temporario = ''
         self.maximo_tentativas_consulta_recibo = 5
@@ -776,11 +777,12 @@ class ProcessadorNFe(object):
             processo.NFe     = nfe
             processo.protNFe = protnfe_recibo
 
-            self.danfe.NFe     = nfe
-            self.danfe.protNFe = protnfe_recibo
-            self.danfe.salvar_arquivo = False
-            self.danfe.gerar_danfe()
-            processo.danfe_pdf = self.danfe.conteudo_pdf
+            if self.gerar_danfe:
+                self.danfe.NFe     = nfe
+                self.danfe.protNFe = protnfe_recibo
+                self.danfe.salvar_arquivo = False
+                self.danfe.gerar_danfe()
+                processo.danfe_pdf = self.danfe.conteudo_pdf
 
             if self.salvar_arquivos:
                 nome_arq = self.caminho + unicode(nfe.chave).strip().rjust(44, '0') + '-proc-nfe.xml'
@@ -799,10 +801,11 @@ class ProcessadorNFe(object):
                 arq.write(processo.xml.encode('utf-8'))
                 arq.close()
 
-                nome_arq = self.caminho + unicode(nfe.chave).strip().rjust(44, '0') + '.pdf'
-                arq = open(nome_arq, 'w')
-                arq.write(processo.danfe_pdf)
-                arq.close()
+                if self.gerar_danfe:
+                    nome_arq = self.caminho + unicode(nfe.chave).strip().rjust(44, '0') + '.pdf'
+                    arq = open(nome_arq, 'w')
+                    arq.write(processo.danfe_pdf)
+                    arq.close()
 
         self.caminho = caminho_original
         return processo
