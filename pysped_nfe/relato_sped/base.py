@@ -158,8 +158,8 @@ class LabelMargemDireita(LabelMargemEsquerda):
 
 
 class Campo(ObjectValue):
-    def __init__(self):
-        super(Campo, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(Campo, self).__init__(*args, **kwargs)
         self.padding_top = 0.1*cm
         self.padding_left = 0.1*cm
         self.padding_bottom = 0.1*cm

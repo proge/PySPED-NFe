@@ -2400,6 +2400,7 @@ class NFe(nfe_110.NFe):
         self.infNFe.ide.cNF.valor = self.chave[35:43]
 
     def monta_chave(self):
+        self.gera_nova_chave()
         # Código da UF do emitente do Documento Fiscal
         chave = unicode(self.infNFe.ide.cUF.valor).strip().rjust(2, '0')
         # Ano e Mês da emissão da NF-e

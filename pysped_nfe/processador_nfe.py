@@ -146,7 +146,7 @@ class ProcessadorNFe(object):
         self.caminho = ''
         self.salvar_arquivos = True
         self.contingencia_SCAN = False
-        self.gerar_danfe = False
+        self.gerar_danfe = True
         self.danfe = DANFE()
         self.caminho_temporario = ''
         self.maximo_tentativas_consulta_recibo = 5
@@ -638,7 +638,7 @@ class ProcessadorNFe(object):
 
         #resposta.validar()
         if self.salvar_arquivos:
-            arq = open(self.caminho + envio.data.strftime('%Y%m%dT%H%M%S') + '-sta.xml', 'w')
+            arq = open(self.caminho + resposta.data.strftime('%Y%m%dT%H%M%S') + '-sta.xml', 'w')
             arq.write(envio.xml.encode('utf-8'))
             arq.close()
 
@@ -780,7 +780,7 @@ class ProcessadorNFe(object):
             if self.gerar_danfe:
                 self.danfe.NFe     = nfe
                 self.danfe.protNFe = protnfe_recibo
-                self.danfe.salvar_arquivo = False
+                self.danfe.salvar_arquivo = self.salvar_arquivos
                 self.danfe.gerar_danfe()
                 processo.danfe_pdf = self.danfe.conteudo_pdf
 

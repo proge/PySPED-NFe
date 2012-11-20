@@ -226,10 +226,16 @@ class DANFE(object):
                 self.danfe.remetente.monta_quadro_emitente(self.danfe.remetente.dados_emitente_logo_horizontal(self.logo))
 
         danfe_pdf = StringIO()
-        self.danfe.generate_by(PDFGenerator, filename=danfe_pdf)
+
+        class MyGenerator(PDFGenerator):
+            def __init__(self, *args, **kwargs):
+                self._current_object = kwargs['_current_object']
+                super(MyGenerator, self).__init__(*args, **kwargs)
+
+        self.danfe.generate_by(MyGenerator, filename=danfe_pdf, _current_object=self)
         self.conteudo_pdf = danfe_pdf.getvalue()
         danfe_pdf.close()
 
         if self.salvar_arquivo:
             nome_arq = self.caminho + self.NFe.chave + '.pdf'
-            self.danfe.generate_by(PDFGenerator, filename=nome_arq)
+            self.danfe.generate_by(MyGenerator, filename=nome_arq, _current_object=self)

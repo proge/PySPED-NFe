@@ -86,7 +86,7 @@ class DANFERetrato(Report):
         self.dados_adicionais = DadosAdicionaisRetrato()
         self.rodape_final     = RodapeFinalRetrato()
 
-    def on_new_page(self, page, page_number, generator):
+    def do_on_new_page(self, page, page_number, generator):
         if generator._current_page_number <> 1:
             self.band_page_footer = self.rodape_final
 
