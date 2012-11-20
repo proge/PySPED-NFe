@@ -47,7 +47,7 @@ from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.lib.colors import HexColor
 
 from geraldo import Report, ReportBand, BAND_WIDTH
-from geraldo import ObjectValue, SystemField, Label, Line
+from geraldo import ObjectValue, SystemField, Label, Line, Rect
 import os
 
 
@@ -141,8 +141,7 @@ EMIT_DADOS = {'fontName': FONTE_NEGRITO, 'fontSize': FONTE_TAMANHO_8, 'alignment
 class LabelMargemEsquerda(Label):
     def __init__(self):
         super(LabelMargemEsquerda, self).__init__()
-        #self.borders_stroke_width = {'top': 0.1, 'right': 0.1, 'bottom': 0.1, 'left': 0.1}
-        self.borders = {'top': 0.1, 'right': 0.1, 'bottom': 0.1, 'left': False}
+        self.borders = {'all': Rect(stroke_width=0.1)}
         self.padding_top = 0.08*cm
         self.padding_left = 0.08*cm
         self.padding_bottom = 0.08*cm
@@ -154,7 +153,7 @@ class LabelMargemEsquerda(Label):
 class LabelMargemDireita(LabelMargemEsquerda):
     def __init__(self):
         super(LabelMargemDireita, self).__init__()
-        self.borders = {'top': 0.1, 'right': False, 'bottom': 0.1, 'left': 0.1}
+        self.borders = {'all': Rect(stroke_width=0.1)}
 
 
 class Campo(ObjectValue):
@@ -182,8 +181,7 @@ class Texto(Label):
 class Descritivo(Label):
     def __init__(self):
         super(Descritivo, self).__init__()
-        #self.borders_stroke_width = {'top': 0.1, 'right': 0.1, 'bottom': 0.1, 'left': 0.1}
-        self.borders = {'top': 0.1, 'right': False, 'bottom': 0.1, 'left': False}
+        self.borders = {'all': Rect(stroke_width=0.1)}
         self.padding_top = 0.03*cm
         self.padding_left = 0.1*cm
         #self.padding_bottom = 0.05*cm
@@ -245,7 +243,7 @@ class BandaDANFE(ReportBand):
         self.elements.append(lbl)
 
         fld = self._inclui_campo(nome, conteudo, top, left, width, height)
-        fld.padding_top = 0.25*cm
+        fld.top += 0.25*cm
         self.elements.append(fld)
 
         return lbl, fld
@@ -327,9 +325,9 @@ class BandaDANFE(ReportBand):
         fld = self._inclui_campo(nome, conteudo, top, left, width, height)
 
         if margem_direita:
-            fld.borders = {'top': 0.1, 'right': False, 'bottom': 0.1, 'left': 0.1}
+            fld.borders = {'all': Rect(stroke_width=0.1)}
         else:
-            fld.borders = {'top': 0.1, 'right': 0.1, 'bottom': 0.1, 'left': False}
+            fld.borders = {'all': Rect(stroke_width=0.1)}
 
         fld.style = DADO_PRODUTO
         fld.padding_top = 0.05*cm
@@ -366,9 +364,9 @@ class BandaDANFE(ReportBand):
         txt.borders_stroke_width = {'top': 0.1, 'right': 0.1, 'bottom': 0.1, 'left': 0.1}
 
         if margem_direita:
-            txt.borders = {'top': 0.1, 'right': False, 'bottom': 0.1, 'left': 0.1}
+            txt.borders = {'all': Rect(stroke_width=0.1)}
         else:
-            txt.borders = {'top': 0.1, 'right': 0.1, 'bottom': 0.1, 'left': False}
+            txt.borders = {'all': Rect(stroke_width=0.1)}
 
         txt.style = DADO_PRODUTO
         txt.padding_top = 0.05*cm
