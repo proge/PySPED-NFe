@@ -636,10 +636,10 @@ class ProcessadorNFe(object):
 
         self._conectar_servico(WS_NFE_SITUACAO, envio, resposta, ambiente)
 
-        #resposta.validar()
+        resposta.validar()
         if self.salvar_arquivos:
-            arq = open(self.caminho + resposta.data.strftime('%Y%m%dT%H%M%S') + '-sta.xml', 'w')
-            arq.write(envio.xml.encode('utf-8'))
+            arq = open(self.caminho + envio.data.strftime('%Y%m%dT%H%M%S') + '-sta.xml', 'w')
+            arq.write(resposta.xml.encode('utf-8'))
             arq.close()
 
         return processo
