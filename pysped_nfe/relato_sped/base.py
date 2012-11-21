@@ -46,8 +46,8 @@ from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.lib.colors import HexColor
 
-from geraldo import Report, ReportBand, BAND_WIDTH
-from geraldo import ObjectValue, SystemField, Label, Line, Rect
+from geraldo import ReportBand
+from geraldo import ObjectValue, Label, Rect
 import os
 
 
@@ -182,10 +182,14 @@ class Descritivo(Label):
     def __init__(self):
         super(Descritivo, self).__init__()
         self.borders = {'all': Rect(stroke_width=0.1)}
-        self.padding_top = 0.03*cm
-        self.padding_left = 0.1*cm
-        #self.padding_bottom = 0.05*cm
-        self.padding_right = 0.1*cm
+        self.top += 0.03*cm
+        self.left += 0.1*cm
+
+        try:
+            self.right += 0.1*cm
+        except AttributeError:
+            self.right = 0.1*cm
+
         self.style = DESCRITIVO_BLOCO
         self.height = 0.42*cm
 
