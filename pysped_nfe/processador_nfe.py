@@ -674,7 +674,7 @@ class ProcessadorNFe(object):
                 #
                 # Se a nota já constar na SEFAZ
                 #
-                if not (
+                if (
                     ((self.versao == '1.10') and (proc_consulta.resposta.infProt.cStat.valor in ('217', '999',)))
                     or
                     ((self.versao == '2.00') and (proc_consulta.resposta.cStat.valor in ('217', '999',)))
