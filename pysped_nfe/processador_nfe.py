@@ -671,19 +671,6 @@ class ProcessadorNFe(object):
                 proc_consulta = self.consultar_nota(ambiente=nfe.infNFe.ide.tpAmb.valor, chave_nfe=nfe.chave)
                 yield proc_consulta
 
-                #
-                # Se a nota já constar na SEFAZ
-                #
-                if (
-                    ((self.versao == '1.10') and (proc_consulta.resposta.infProt.cStat.valor in ('217', '999',)))
-                    or
-                    ((self.versao == '2.00') and (proc_consulta.resposta.cStat.valor in ('217', '999',)))
-                ):
-                    #
-                    # Interrompe todo o processo
-                    #
-                    return
-
             #
             # Nenhuma das notas estava já enviada, enviá-las então
             #
@@ -767,7 +754,8 @@ class ProcessadorNFe(object):
         # 301 - denegada por irregularidade do emitente
         # 302 - denegada por irregularidade do destinatário
         #
-        if protnfe_recibo.infProt.cStat.valor in ('100', '150', '110', '301', '302'):
+        if protnfe_recibo.infProt.cStat.valor in ('100', '104', '150', '110',
+                                                  '301', '302', '204'):
             if self.versao == '1.10':
                 processo = ProcNFe_110()
 
