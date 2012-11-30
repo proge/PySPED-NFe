@@ -102,8 +102,7 @@ class DANFE(object):
         if self.NFe.infNFe.ide.tpImp.valor == 2:
             raise ValueError('DANFE em formato paisagem ainda não implementado')
         else:
-            self.danfe = DANFERetrato()
-            self.danfe.queryset = self.NFe.infNFe.det
+            self.danfe = DANFERetrato(queryset=self.NFe.infNFe.det)
 
         if self.imprime_canhoto:
             self.danfe.band_page_header = self.danfe.canhoto

@@ -328,11 +328,7 @@ class BandaDANFE(ReportBand):
     def inclui_campo_produto(self, nome, conteudo, top, left, width, height=None, margem_direita=False):
         fld = self._inclui_campo(nome, conteudo, top, left, width, height)
 
-        if margem_direita:
-            fld.borders = {'all': Rect(stroke_width=0.1)}
-        else:
-            fld.borders = {'all': Rect(stroke_width=0.1)}
-
+        fld.borders = {'all': Rect(stroke_width=0.1)}
         fld.style = DADO_PRODUTO
         fld.padding_top = 0.05*cm
         fld.padding_left = 0.05*cm
@@ -365,13 +361,8 @@ class BandaDANFE(ReportBand):
 
     def inclui_texto_produto(self, nome, texto, top, left, width, height=None, margem_direita=False):
         txt = self._inclui_texto(nome, texto, top, left, width, height)
-        txt.borders_stroke_width = {'top': 0.1, 'right': 0.1, 'bottom': 0.1, 'left': 0.1}
 
-        if margem_direita:
-            txt.borders = {'all': Rect(stroke_width=0.1)}
-        else:
-            txt.borders = {'all': Rect(stroke_width=0.1)}
-
+        txt.borders = {'all': Rect(stroke_width=0.1)}
         txt.style = DADO_PRODUTO
         txt.padding_top = 0.05*cm
         txt.padding_left = 0.05*cm
