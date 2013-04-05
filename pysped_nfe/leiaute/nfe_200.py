@@ -790,6 +790,19 @@ class ICMS(nfe_110.ICMS):
         #
         # O regime tributário é o Simples Nacional
         #
+        elif self.CST.valor in ('40', '41', '50'):
+            xml += self.CST.xml
+
+            if self.repasse and self.CST.valor == '41':
+                xml += self.vBCSTRet.xml
+                xml += self.vICMSSTRet.xml
+                xml += self.vBCSTDest.xml
+                xml += self.vICMSSTDest.xml
+    
+            elif self.motDesICMS.valor:
+                xml += self.vICMS.xml
+                xml += self.motDesICMS.xml
+
         else:
             xml += self.CSOSN.xml
 

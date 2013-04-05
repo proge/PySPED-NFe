@@ -160,7 +160,7 @@ class ProcessadorNFe(object):
         if ambiente is None:
             ambiente = self.ambiente
 
-        if self.versao == '1.10':
+        if self.versao == u'1.10':
             metodo_ws = webservices_1.METODO_WS
             self._soap_envio   = SOAPEnvio_110()
             self._soap_retorno = SOAPRetorno_110()
@@ -172,7 +172,7 @@ class ProcessadorNFe(object):
                 self._servidor = webservices_1.ESTADO_WS[self.estado][ambiente]['servidor']
                 self._url      = webservices_1.ESTADO_WS[self.estado][ambiente][servico]
 
-        elif self.versao == '2.00':
+        elif self.versao == u'2.00':
             metodo_ws = webservices_2.METODO_WS
             self._soap_envio   = SOAPEnvio_200()
             self._soap_retorno = SOAPRetorno_200()
@@ -271,11 +271,11 @@ class ProcessadorNFe(object):
         con.close()
 
     def enviar_lote(self, numero_lote=None, lista_nfes=[]):
-        if self.versao == '1.10':
+        if self.versao == u'1.10':
             envio = EnviNFe_110()
             resposta = RetEnviNFe_110()
 
-        elif self.versao == '2.00':
+        elif self.versao == u'2.00':
             envio = EnviNFe_200()
             resposta = RetEnviNFe_200()
 
@@ -332,11 +332,11 @@ class ProcessadorNFe(object):
         return processo
 
     def consultar_recibo(self, ambiente=None, numero_recibo=None):
-        if self.versao == '1.10':
+        if self.versao == u'1.10':
             envio = ConsReciNFe_110()
             resposta = RetConsReciNFe_110()
 
-        elif self.versao == '2.00':
+        elif self.versao == u'2.00':
             envio = ConsReciNFe_200()
             resposta = RetConsReciNFe_200()
 
@@ -394,11 +394,11 @@ class ProcessadorNFe(object):
         return processo
 
     def cancelar_nota(self, ambiente=None, chave_nfe=None, numero_protocolo=None, justificativa=None):
-        if self.versao == '1.10':
+        if self.versao == u'1.10':
             envio = CancNFe_107()
             resposta = RetCancNFe_107()
 
-        elif self.versao == '2.00':
+        elif self.versao == u'2.00':
             envio = CancNFe_200()
             resposta = RetCancNFe_200()
 
@@ -432,10 +432,10 @@ class ProcessadorNFe(object):
         # 151 - cancelado fora do prazo
         #
         if resposta.infCanc.cStat.valor in ('101', '151'):
-            if self.versao == '1.10':
+            if self.versao == u'1.10':
                 processo_cancelamento_nfe = ProcCancNFe_107()
 
-            elif self.versao == '2.00':
+            elif self.versao == u'2.00':
                 processo_cancelamento_nfe = ProcCancNFe_200()
 
             nome_arq = self.caminho + unicode(envio.infCanc.chNFe.valor).strip().rjust(44, '0') + '-proc-canc-nfe.xml'
@@ -475,11 +475,11 @@ class ProcessadorNFe(object):
         return processo
 
     def inutilizar_nota(self, ambiente=None, codigo_estado=None, ano=None, cnpj=None, serie=None, numero_inicial=None, numero_final=None, justificativa=None):
-        if self.versao == '1.10':
+        if self.versao == u'1.10':
             envio = InutNFe_107()
             resposta = RetInutNFe_107()
 
-        elif self.versao == '2.00':
+        elif self.versao == u'2.00':
             envio = InutNFe_200()
             resposta = RetInutNFe_200()
 
@@ -524,10 +524,10 @@ class ProcessadorNFe(object):
 
         # Se for autorizada, monta o processo de inutilização
         if resposta.infInut.cStat.valor == '102':
-            if self.versao == '1.10':
+            if self.versao == u'1.10':
                 processo_inutilizacao_nfe = ProcInutNFe_107()
 
-            elif self.versao == '2.00':
+            elif self.versao == u'2.00':
                 processo_inutilizacao_nfe = ProcInutNFe_200()
 
             processo_inutilizacao_nfe.inutNFe = envio
@@ -566,11 +566,11 @@ class ProcessadorNFe(object):
         return processo
 
     def consultar_nota(self, ambiente=None, chave_nfe=None, nfe=None):
-        if self.versao == '1.10':
+        if self.versao == u'1.10':
             envio = ConsSitNFe_107()
             resposta = RetConsSitNFe_107()
 
-        elif self.versao == '2.00':
+        elif self.versao == u'2.00':
             envio = ConsSitNFe_201()
             resposta = RetConsSitNFe_201()
 
@@ -608,11 +608,11 @@ class ProcessadorNFe(object):
         return processo
 
     def consultar_servico(self, ambiente=None, codigo_estado=None):
-        if self.versao == '1.10':
+        if self.versao == u'1.10':
             envio = ConsStatServ_107()
             resposta = RetConsStatServ_107()
 
-        elif self.versao == '2.00':
+        elif self.versao == u'2.00':
             envio = ConsStatServ_200()
             resposta = RetConsStatServ_200()
 
@@ -636,7 +636,7 @@ class ProcessadorNFe(object):
 
         self._conectar_servico(WS_NFE_SITUACAO, envio, resposta, ambiente)
 
-        resposta.validar()
+        #resposta.validar()
         if self.salvar_arquivos:
             arq = open(self.caminho + envio.data.strftime('%Y%m%dT%H%M%S') + '-sta.xml', 'w')
             arq.write(resposta.xml.encode('utf-8'))
@@ -756,10 +756,10 @@ class ProcessadorNFe(object):
         #
         if protnfe_recibo.infProt.cStat.valor in ('100', '104', '150', '110',
                                                   '301', '302', '204'):
-            if self.versao == '1.10':
+            if self.versao == u'1.10':
                 processo = ProcNFe_110()
 
-            elif self.versao == '2.00':
+            elif self.versao == u'2.00':
                 processo = ProcNFe_200()
 
             processo.NFe     = nfe
