@@ -42,6 +42,7 @@
 from StringIO import StringIO
 from danferetrato import *
 from pysped_nfe.leiaute import ProtNFe_200, RetCancNFe_200, ProcCancNFe_200
+from pysped_nfe.leiaute import ProcEventoCancNFe_100, EnvEventoCancNFe_100, RetEnvEventoCancNFe_100
 
 
 class DANFE(object):
