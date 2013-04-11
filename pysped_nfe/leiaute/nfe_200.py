@@ -470,6 +470,7 @@ class TagCSTICMS(nfe_110.TagCSTICMS):
         # redefinimos a raiz e a obrigatoriedade das
         # tags do grupo de ICMS
         #
+        # TODO: Revisar obrigatoriedades
         if self.valor == '00':
             self.grupo_icms.nome_tag = 'ICMS00'
             self.grupo_icms.nome_tag_txt = 'N02'
@@ -532,6 +533,7 @@ class TagCSTICMS(nfe_110.TagCSTICMS):
                 self.grupo_icms.nome_tag = 'ICMS40'
                 self.grupo_icms.nome_tag_txt = 'N06'
                 self.grupo_icms.raiz_tag = '//det/imposto/ICMS/ICMS40'
+                self.grupo_icms.vICMS.obrigatorio = True
 
         elif self.valor == '51':
             self.grupo_icms.nome_tag = 'ICMS51'
@@ -787,6 +789,9 @@ class ICMS(nfe_110.ICMS):
                     xml += self.pBCOp.xml
                     xml += self.UFST.xml
 
+        #
+        # O regime tributário é o Simples Nacional
+        #
         else:
             xml += self.CSOSN.xml
 
