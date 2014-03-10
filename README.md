@@ -6,7 +6,7 @@ Code refactoring and segmentation from Aristides Caldeira's [PySPED](https://git
 Setup
 -----
 
-pip install PyOpenSSL geraldo
+pip install pyOpenSSL==0.12 geraldo
 
 
 wget ftp://xmlsoft.org/libxml2/libxml2-sources-2.7.8.tar.gz
