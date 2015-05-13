@@ -8,7 +8,7 @@ Setup
 
 #### Instalar dependências via pip
 
-pip install pyOpenSSL==0.12 geraldo
+pip install pyOpenSSL==0.14 geraldo
 
 #### Instalar libxml
 
